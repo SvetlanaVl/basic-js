@@ -25,33 +25,35 @@ function transform(arr) {
     
   }
 
-  if (arr.indexOf(doubleNext) >= 0) {
-    let doubleNextNumber = arr.indexOf(doubleNext);
-    arr.splice(doubleNextNumber + 1, 0, arr[doubleNextNumber + 1]);
-    delete arr[doubleNextNumber];
-  }
+  let arrCopy = arr.slice();
   
-  if (arr.indexOf(doublePrev) >= 0) {
-    let doublePrevNumber = arr.indexOf(doublePrev);
-    arr.splice(doublePrevNumber, 0, arr[doublePrevNumber - 1]);
-    delete arr[doublePrevNumber + 1];
-  }
+  for(let i = 0; i < arrCopy.length; i++) {
+    if (arrCopy[i] === discardNext) {
+      let discardNextNumber = arrCopy.indexOf(discardNext);
+      delete arrCopy[discardNextNumber + 1];
+      delete arrCopy[discardNextNumber];
+    }
+  
+    if (arrCopy[i] === discardPrev) {
+      let discardPrevNumber = arrCopy.indexOf(discardPrev);
+      delete arrCopy[discardPrevNumber - 1];
+      delete arrCopy[discardPrevNumber];
+    }
 
-  if (arr.indexOf(discardNext) >= 0) {
-    let discardNextNumber = arr.indexOf(discardNext);
-    delete arr[discardNextNumber + 1];
-    delete arr[discardNextNumber];
+    if (arrCopy[i] === doubleNext) {
+      let doubleNextNumber = arrCopy.indexOf(doubleNext);
+      arrCopy.splice(doubleNextNumber + 1, 0, arrCopy[doubleNextNumber + 1]);
+      delete arrCopy[doubleNextNumber];
+    }
+  
+    if (arrCopy[i] === doublePrev) {
+      let doublePrevNumber = arrCopy.indexOf(doublePrev);
+      arrCopy.splice(doublePrevNumber, 0, arrCopy[doublePrevNumber - 1]);
+      delete arrCopy[doublePrevNumber + 1];
+    }
   }
   
-  if (arr.indexOf(discardPrev) >= 0) {
-    let discardPrevNumber = arr.indexOf(discardPrev);
-    delete arr[discardPrevNumber - 1];
-    delete arr[discardPrevNumber];
-  }
-  
-  
-  
-  return arr.filter(Boolean)
+  return arrCopy.filter(Boolean)
 }
 
 module.exports = {

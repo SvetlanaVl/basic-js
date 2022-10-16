@@ -21,8 +21,6 @@ function transform(arr) {
 
   if (!Array.isArray(arr)) {
     throw new Error('\'arr\' parameter must be an instance of the Array!')
-    // return '\'arr\' parameter must be an instance of the Array!'
-    
   }
 
   let arrCopy = arr.slice();
